@@ -1,0 +1,14 @@
+.list-parent{
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid;
+}
+
+.list-items{
+  display: flex;
+  flex-direction: column;
+}
+
+.btn-container{
+  display: flex;
+}
