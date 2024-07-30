@@ -1,23 +1,24 @@
 <h2>Mis tareas</h2>
 
 <mat-list role="list">
-  <mat-list-item *ngFor="let task of taskArr" role="listitem">
+  <mat-list-item *ngFor="let task of taskArr | filterCompleted:false" role="listitem">
     <div class="list-parent">
       <div class="list-items">
-        <ng-container >
+        <ng-container>
           <span matListItemTitle>{{ task.title }}</span>
           <span matListItemLine>{{ task.comment }}</span>
         </ng-container>
-       
       </div>
       <div class="btn-container">
+        <input class="checkbox" type="checkbox" [(ngModel)]="task.completed" name="completed-{{task.id}}" (change)="toggleComplete(task)">
         <button (click)="deleteTask(task)" mat-fab>
           <mat-icon>delete</mat-icon>
         </button>
-        <!-- <button (click)="call(task)" mat-fab >
-          <mat-icon>edit</mat-icon>
-        </button> -->
       </div>
     </div>
   </mat-list-item>
 </mat-list>
+
+<a routerLink="/completedTasks">Ver tareas completadas</a>
+
+<router-outlet></router-outlet>

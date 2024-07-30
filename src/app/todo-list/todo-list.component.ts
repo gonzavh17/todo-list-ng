@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TodoService } from '../service/todo.service';
 import { Task } from '../model/task';
+import { FilterCompletedPipe } from '../pipe/filter-completed.pipe';
 
 import { MatListModule } from '@angular/material/list';
 import { CommonModule } from '@angular/common';
@@ -8,6 +9,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormField, MatLabel } from '@angular/material/form-field';
+import { MatPseudoCheckbox } from '@angular/material/core';
+import { FormsModule } from '@angular/forms';
+import { RouterLink, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-todo-list',
@@ -19,7 +23,12 @@ import { MatFormField, MatLabel } from '@angular/material/form-field';
     MatDividerModule,
     MatIconModule,
     MatFormField,
-    MatLabel
+    MatLabel,
+    MatPseudoCheckbox,
+    FormsModule,
+    RouterLink,
+    RouterModule,
+    FilterCompletedPipe
   ],
   templateUrl: './todo-list.component.html',
   styleUrls: ['./todo-list.component.css'],
@@ -27,7 +36,7 @@ import { MatFormField, MatLabel } from '@angular/material/form-field';
 export class TodoListComponent implements OnInit {
   taskObj : Task = new Task();
   taskArr: Task[] = [];
-  
+  showCompletedTasks: boolean = false;
 
   editTaskValue: string = '';
   editingTask: any = null;
@@ -76,5 +85,13 @@ export class TodoListComponent implements OnInit {
     this.taskObj = etask;
     this.editTaskValue = etask.title;
     console.log(this.taskObj = etask)
+  }
+
+  toggleComplete(task : Task) {
+    this.todoService.updateTask(task).subscribe(res => {
+      console.log("Tarea actualizada: ", res)
+    }, err => {
+      console.log('Error al actualizar estado de la tarea', err)
+    })
   }
 }

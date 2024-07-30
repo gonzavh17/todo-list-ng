@@ -30,7 +30,7 @@ export class TodoFormComponent {
   constructor(private todoService: TodoService) {}
 
   ngOnInit(): void {
-    this.taskObj = { id: 0, title: '', comment: '' };
+    this.taskObj = { completed: false, id: 0, title: '', comment: '' };
   }
 
   addTask(): void {
@@ -38,7 +38,7 @@ export class TodoFormComponent {
       this.todoService.addTask(this.taskObj).subscribe(
         res => {
           console.log('Task added successfully:', res);
-          this.taskObj = { id: 0, title: '', comment: '' };
+          this.taskObj = {completed: false, id: 0, title: '', comment: '' };
           
         },
         err => {

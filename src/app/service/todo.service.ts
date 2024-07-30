@@ -39,4 +39,8 @@ export class TodoService {
   editTask(task : Task) : Observable<Task> {
     return this.http.put<Task>(this.serviceURL + '/' + task.id , task)
   }
+
+  updateTask(task: Task): Observable<Task> {
+    return this.http.put<Task>(`${this.serviceURL}/${task.id}`, task);
+  }
 }

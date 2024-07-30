@@ -12,3 +12,7 @@
 .btn-container{
   display: flex;
 }
+
+.checkbox {
+  margin: 0 10px;
+}
